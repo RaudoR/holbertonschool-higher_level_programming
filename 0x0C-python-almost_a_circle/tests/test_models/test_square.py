@@ -48,6 +48,26 @@ class TestSquare(unittest.TestCase):
         p = p8.check_files(['tests/test_models/test_square.py'])
         self.assertEqual(p.total_errors, 0, "fix pep8")
 
+    def test_00_documentation(self):
+        """
+        Test to see if documentation is
+        created and correct
+        """
+        self.assertTrue(hasattr(Square, "__init__"))
+        self.assertTrue(Square.__init__.__doc__)
+        self.assertTrue(hasattr(Square, "size"))
+        self.assertTrue(Square.size.__doc__)
+        self.assertTrue(hasattr(Square, "x"))
+        self.assertTrue(Square.x.__doc__)
+        self.assertTrue(hasattr(Square, "y"))
+        self.assertTrue(Square.y.__doc__)
+        self.assertTrue(hasattr(Square, "__str__"))
+        self.assertTrue(Square.__str__.__doc__)
+        self.assertTrue(hasattr(Square, "update"))
+        self.assertTrue(Square.update.__doc__)
+        self.assertTrue(hasattr(Square, "to_dictionary"))
+        self.assertTrue(Square.to_dictionary.__doc__)
+
     def test_0_id(self):
         """
         Testng for id
@@ -173,3 +193,22 @@ class TestSquare(unittest.TestCase):
         finally:
             sys.stdout.seek(0)
             sys.stdout.truncate(0)
+
+    def test_6_size(self):
+        """
+        Test to see if size works right
+        """
+        Base._Base__nb_objects = 0
+        S1 = Square(3)
+        self.assertEqual(S1.size, 3)
+        self.assertEqual(S1.__str__(), "[Square] (1) 0/0 - 3")
+        S1.size = 10
+        self.assertEqual(S1.size, 10)
+        self.assertEqual(S1.__str__(), "[Square] (1) 0/0 - 10")
+        with self.assertRaisesRegex(TypeError, "width must be an integer"):
+            S1.size = "Gel"
+            S1.size = 1.1
+            S1.size = {1}
+            S1.size = [1]
+        with self.assertRaisesRegex(ValueError, "width must be > 0"):
+            S1.size = 0

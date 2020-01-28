@@ -48,6 +48,32 @@ class TestRectangle(unittest.TestCase):
         p = p8.check_files(['tests/test_models/test_rectangle.py'])
         self.assertEqual(p.total_errors, 0, "fix pep8")
 
+    def test_00_documentation(self):
+        """
+        Test to see if documentation is
+        created and correct
+        """
+        self.assertTrue(hasattr(Rectangle, "__init__"))
+        self.assertTrue(Rectangle.__init__.__doc__)
+        self.assertTrue(hasattr(Rectangle, "width"))
+        self.assertTrue(Rectangle.width.__doc__)
+        self.assertTrue(hasattr(Rectangle, "height"))
+        self.assertTrue(Rectangle.height.__doc__)
+        self.assertTrue(hasattr(Rectangle, "x"))
+        self.assertTrue(Rectangle.x.__doc__)
+        self.assertTrue(hasattr(Rectangle, "y"))
+        self.assertTrue(Rectangle.y.__doc__)
+        self.assertTrue(hasattr(Rectangle, "area"))
+        self.assertTrue(Rectangle.area.__doc__)
+        self.assertTrue(hasattr(Rectangle, "display"))
+        self.assertTrue(Rectangle.display.__doc__)
+        self.assertTrue(hasattr(Rectangle, "__str__"))
+        self.assertTrue(Rectangle.__str__.__doc__)
+        self.assertTrue(hasattr(Rectangle, "update"))
+        self.assertTrue(Rectangle.update.__doc__)
+        self.assertTrue(hasattr(Rectangle, "to_dictionary"))
+        self.assertTrue(Rectangle.to_dictionary.__doc__)
+
     def test_0_id(self):
         """
         Tests for id
@@ -240,3 +266,28 @@ class TestRectangle(unittest.TestCase):
         R2.update(**R1.to_dictionary())
         self.assertEqual(R2.__str__(), "[Rectangle] (1) 1/9 - 10/2")
         self.assertNotEqual(R1, R2)
+
+    def test_12_save_file_rect(self):
+        """
+        Test save_to_file() method of Rectangle to serialize
+        and write to a file. Removes file after test if test
+        was able to write to disk.
+        """
+        Base._Base__nb_objects = 0
+        R1 = Rectangle(10, 7, 2, 8)
+        R2 = Rectangle(2, 4)
+        Rectangle.save_to_file([R1, R2])
+        self.assertTrue(os.path.exists("Rectangle.json"), True)
+        with open("Rectangle.json", mode='r') as myFile:
+            self.assertEqual(json.loads(myFile.read()),
+                             json.loads('[{"y": 8, '
+                                        '"x": 2, '
+                                        '"id": 1, '
+                                        '"width": 10, '
+                                        '"height": 7}, '
+                                        '{"y": 0, '
+                                        '"x": 0, '
+                                        '"id": 2, '
+                                        '"width": 2, '
+                                        '"height": 4}]'))
+        os.remove("Rectangle.json")
