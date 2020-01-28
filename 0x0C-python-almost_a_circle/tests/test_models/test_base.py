@@ -49,28 +49,6 @@ class TestBase(unittest.TestCase):
         p = p8.check_files(['tests/test_models/test_base.py'])
         self.assertEqual(p.total_errors, 0, "fix pep8")
 
-    def test_docstring(self):
-        """test if docstring"""
-        self.assertIsNotNone(Base.__doc__)
-
-    def test_00_documentation(self):
-        """
-        Test to see if documentation is
-        created and correct
-        """
-        self.assertTrue(hasattr(Base, "__init__"))
-        self.assertTrue(Base.__init__.__doc__)
-        self.assertTrue(hasattr(Base, "create"))
-        self.assertTrue(Base.create.__doc__)
-        self.assertTrue(hasattr(Base, "to_json_string"))
-        self.assertTrue(Base.to_json_string.__doc__)
-        self.assertTrue(hasattr(Base, "from_json_string"))
-        self.assertTrue(Base.from_json_string.__doc__)
-        self.assertTrue(hasattr(Base, "save_to_file"))
-        self.assertTrue(Base.save_to_file.__doc__)
-        self.assertTrue(hasattr(Base, "load_from_file"))
-        self.assertTrue(Base.load_from_file.__doc__)
-
     def test_0_id(self):
         """
         Test to check for id method
