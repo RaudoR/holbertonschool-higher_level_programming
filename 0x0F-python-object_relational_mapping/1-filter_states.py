@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-# this script will display all states in the database
+# this script will display all states in the database starting with N
 import MySQLdb
 from sys import argv
 
