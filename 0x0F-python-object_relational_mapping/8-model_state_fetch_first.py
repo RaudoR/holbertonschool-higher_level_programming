@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""Start link class to table in database"""
+"""Start link class to table"""
 import sqlalchemy
 import sys
 from sqlalchemy import create_engine
@@ -14,7 +14,10 @@ if __name__ == "__main__":
     Base.metadata.create_all(engine)
     Session = sessionmaker(bind=engine)
     session = Session()
-    for item in session.query(State).order_by(State.id):
-        print("{}: {}".format(item.id, item.name))
+    first = session.query(State).order_by(State.id).first()
+    if first:
+        print("{}: {}".format(first.id, first.name))
+    else:
+        print('Nothing')
 
     session.close()
