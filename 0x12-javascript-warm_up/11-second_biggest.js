@@ -5,7 +5,7 @@ function secondhighest () {
   } else if (process.argv.length === 3) {
     return 0;
   }
-  let args = [];
+  const args = [];
   for (let cnt = 2; cnt < process.argv.length; cnt++) {
     args.push(parseInt(process.argv[cnt]));
   }
