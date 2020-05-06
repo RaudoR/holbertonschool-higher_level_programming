@@ -1,13 +1,6 @@
 #!/usr/bin/node
-'use strict';
-(function secondBiggest (arg) {
-  let list = [];
-  if (process.argv.length < 4) {
-    console.log(0);
-  } else {
-    for (let count = 2; count < process.argv.length; count++) {
-      list.push(Number(process.argv[count]));
-    }
-    console.log(list.sort()[list.length - 2]);
-  }
-})();
+if (process.argv.length <= 3) {
+  console.log(0);
+} else {
+  console.log(process.argv.sort().reverse()[1]);
+}
