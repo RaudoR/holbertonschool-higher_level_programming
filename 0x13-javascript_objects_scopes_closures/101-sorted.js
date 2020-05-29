@@ -1,7 +1,7 @@
 #!/usr/bin/node
 const data = require('./101-data.js').dict;
-let ndict = {};
-for (let k in data) {
+const ndict = {};
+for (const k in data) {
   ndict[data[k]] = [];
 }
 for (let key in ndict) {
