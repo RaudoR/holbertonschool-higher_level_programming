@@ -4,8 +4,8 @@ const ndict = {};
 for (const k in data) {
   ndict[data[k]] = [];
 }
-for (let key in ndict) {
-  for (let k in data) {
+for (const key in ndict) {
+  for (const k in data) {
     if (String(data[k]) === String(key)) {
       ndict[key].push(k);
     }
